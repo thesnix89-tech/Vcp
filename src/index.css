@@ -1,0 +1,217 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light — warm cream */
+    --c-bg: 250 249 245;        /* #FAF9F5 */
+    --c-bg-alt: 245 243 236;    /* #F5F3EC */
+    --c-bg-elev: 255 255 255;   /* #FFFFFF */
+    --c-bg-card: 255 255 255;
+    --c-bg-line: 232 229 218;   /* #E8E5DA */
+    --c-bg-subtle: 240 237 226; /* #F0EDE2 */
+
+    --c-ink: 31 30 27;          /* #1F1E1B */
+    --c-ink-soft: 58 56 51;     /* #3A3833 */
+    --c-ink-mute: 107 103 96;   /* #6B6760 */
+    --c-ink-dim: 148 144 138;   /* #94908A */
+    --c-ink-faint: 191 187 177; /* #BFBBB1 */
+
+    --c-accent: 201 99 66;      /* #C96342 — Claude orange */
+    --c-accent-hover: 181 87 58;
+    --c-accent-soft: 241 221 211;
+    --c-accent-tint: 251 238 231;
+
+    --c-good: 63 133 86;
+    --c-bad: 180 63 63;
+
+    color-scheme: light;
+  }
+
+  .dark {
+    /* Dark — warm graphite */
+    --c-bg: 22 21 19;           /* #161513 */
+    --c-bg-alt: 31 29 26;       /* #1F1D1A */
+    --c-bg-elev: 36 34 31;      /* #24221F */
+    --c-bg-card: 36 34 31;
+    --c-bg-line: 56 53 48;      /* #383530 */
+    --c-bg-subtle: 31 29 26;
+
+    --c-ink: 240 237 229;       /* #F0EDE5 */
+    --c-ink-soft: 213 209 198;  /* #D5D1C6 */
+    --c-ink-mute: 161 156 146;  /* #A19C92 */
+    --c-ink-dim: 116 111 102;
+    --c-ink-faint: 80 76 70;
+
+    --c-accent: 217 119 87;     /* #D97757 — slightly brighter on dark */
+    --c-accent-hover: 232 134 102;
+    --c-accent-soft: 64 38 28;
+    --c-accent-tint: 48 28 20;
+
+    --c-good: 92 175 119;
+    --c-bad: 219 110 110;
+
+    color-scheme: dark;
+  }
+
+  .blackout {
+    /* Blackout — pure black, orange-only accent */
+    --c-bg: 0 0 0;
+    --c-bg-alt: 10 10 10;
+    --c-bg-elev: 14 14 14;
+    --c-bg-card: 8 8 8;
+    --c-bg-line: 28 28 28;
+    --c-bg-subtle: 14 14 14;
+
+    --c-ink: 240 240 240;
+    --c-ink-soft: 200 200 200;
+    --c-ink-mute: 140 140 140;
+    --c-ink-dim: 100 100 100;
+    --c-ink-faint: 70 70 70;
+
+    --c-accent: 230 120 80;
+    --c-accent-hover: 245 140 100;
+    --c-accent-soft: 60 30 18;
+    --c-accent-tint: 38 20 12;
+
+    --c-good: 100 180 130;
+    --c-bad: 220 100 100;
+
+    color-scheme: dark;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    @apply bg-bg text-ink antialiased font-sans;
+    font-feature-settings: "ss01", "cv11";
+  }
+  ::selection {
+    background: rgb(var(--c-accent-soft));
+    color: rgb(var(--c-ink));
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-bg-card border border-bg-line rounded-xl shadow-card;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition;
+  }
+  .btn-primary {
+    @apply btn bg-accent hover:bg-accent-hover text-white;
+  }
+  .btn-ghost {
+    @apply btn bg-bg-elev hover:bg-bg-alt text-ink border border-bg-line;
+  }
+  .btn-link {
+    @apply text-accent hover:text-accent-hover font-medium;
+  }
+  .btn-hero-primary {
+    @apply inline-flex items-center gap-2.5 rounded-lg bg-accent text-white pl-2 pr-5 py-2 text-sm font-medium shadow-soft transition hover:bg-accent-hover hover:shadow-card hover:-translate-y-0.5;
+  }
+  .btn-hero-ghost {
+    @apply inline-flex items-center gap-2.5 rounded-lg bg-bg-card text-ink border border-bg-line pl-2 pr-5 py-2 text-sm font-medium transition hover:border-accent/40 hover:bg-bg-elev hover:-translate-y-0.5;
+  }
+  .input {
+    @apply w-full bg-bg-elev border border-bg-line rounded-lg px-3 py-2 text-sm text-ink placeholder:text-ink-faint focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/15;
+  }
+  .label {
+    @apply text-xs uppercase tracking-wider text-ink-mute font-medium;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full bg-bg-subtle border border-bg-line px-2.5 py-1 text-xs text-ink-soft;
+  }
+  .chip-accent {
+    @apply chip bg-accent-tint border-accent/20 text-accent-hover;
+  }
+  .h-display {
+    @apply font-serif text-4xl sm:text-5xl tracking-tight text-ink leading-[1.05] text-center;
+  }
+  .h-section {
+    @apply font-serif text-2xl text-ink tracking-tight text-center;
+  }
+  .h-section-left {
+    @apply font-serif text-2xl text-ink tracking-tight;
+  }
+
+  /* Navigation pill — always visible contour, smooth states */
+  .nav-pill {
+    @apply relative px-3 py-1.5 rounded-lg text-[13px] text-ink-mute border border-bg-line bg-bg-elev/40 transition-all duration-200 whitespace-nowrap;
+  }
+  .nav-pill:hover {
+    @apply text-ink border-accent/30 bg-bg-elev;
+  }
+  .nav-pill-active {
+    @apply text-ink border-accent/50 bg-accent-tint;
+  }
+  .nav-pill-active:hover {
+    @apply border-accent/60 bg-accent-tint;
+  }
+
+  /* Decorative dot row used as a section divider */
+  .deco-dots {
+    @apply inline-flex gap-1.5 items-center;
+  }
+  .deco-dots span {
+    @apply w-1 h-1 rounded-full bg-ink-faint;
+  }
+  .deco-dots span:nth-child(2) {
+    @apply bg-accent;
+  }
+
+  .prose-ai h1 {
+    @apply font-serif text-2xl mt-6 mb-3 text-ink;
+  }
+  .prose-ai h2 {
+    @apply font-serif text-xl mt-5 mb-2 text-ink;
+  }
+  .prose-ai h3 {
+    @apply font-serif text-lg mt-4 mb-2 text-ink;
+  }
+  .prose-ai p {
+    @apply text-ink-soft leading-relaxed my-3;
+  }
+  .prose-ai ul {
+    @apply list-disc pl-5 my-3 text-ink-soft space-y-1 marker:text-ink-faint;
+  }
+  .prose-ai ol {
+    @apply list-decimal pl-5 my-3 text-ink-soft space-y-1 marker:text-ink-faint;
+  }
+  .prose-ai code {
+    @apply bg-bg-subtle px-1.5 py-0.5 rounded text-[0.85em] text-accent-hover border border-bg-line;
+  }
+  .prose-ai pre {
+    @apply bg-bg-subtle border border-bg-line rounded-lg p-3 overflow-x-auto my-3 text-xs;
+  }
+  .prose-ai pre code {
+    @apply bg-transparent border-0 text-ink-soft p-0;
+  }
+  .prose-ai blockquote {
+    @apply border-l-2 border-accent pl-3 my-3 text-ink-mute italic;
+  }
+  .prose-ai a {
+    @apply text-accent hover:text-accent-hover underline underline-offset-2;
+  }
+  .prose-ai strong {
+    @apply text-ink font-semibold;
+  }
+  .prose-ai table {
+    @apply w-full text-sm my-4 border-collapse;
+  }
+  .prose-ai th,
+  .prose-ai td {
+    @apply border border-bg-line px-3 py-2 text-left;
+  }
+  .prose-ai th {
+    @apply bg-bg-subtle text-ink-soft font-medium;
+  }
+  .prose-ai hr {
+    @apply border-bg-line my-6;
+  }
+}
